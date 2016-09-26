@@ -31,7 +31,7 @@ module Unread
         options.reverse_merge!(:on => :updated_at)
         self.readable_options = options
 
-        has_many :read_marks, :as => :readable, :dependent => :delete_all, inverse_of: :readable
+        has_many :read_marks, -> { where(readable_type: options[:class]) }, :as => :readable, :dependent => :delete_all, inverse_of: :readable
 
         ReadMark.readable_classes << self
 
