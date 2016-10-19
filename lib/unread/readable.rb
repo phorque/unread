@@ -30,7 +30,7 @@ module Unread
               # This transaction is needed, so that parent transaction won't rollback even there's an error.
               ReadMark.transaction(requires_new: true) do
                 begin
-                  rm = obj.read_marks.where(reader_id: reader.id, reader_type: PublicActivity::Activity).first || obj.read_marks.build
+                  rm = obj.read_marks.where(reader_id: reader.id, reader_type: "PublicActivity::Activity").first || obj.read_marks.build
                   rm.reader_id   = reader.id
                   rm.reader_type = reader.class.base_class.name
                   rm.timestamp   = timestamp
